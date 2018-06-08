@@ -1,0 +1,56 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Fashion" border="normal" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('greenglobal.viewmodel.ProductViewModel')">
+	<hlayout>
+		<listbox selectedItem="@bind(vm.selectedTodo)" hflex="1" vflex="true" model="@load(vm.listModelList)">
+			
+			<listhead>
+				<listheader label="ID"></listheader>
+				<listheader label="Full name"></listheader>
+				<listheader label="Price"></listheader>
+				<listheader label="Description"></listheader>
+				<listheader label="Ctrl"></listheader>
+			</listhead>
+			<template name="model" var="Product">
+				<listitem>
+					<listcell label="@load(Product.id)"></listcell>
+					<listcell label="@load(Product.name)"></listcell>
+					<listcell label="@load(Product.price)"></listcell>
+					<listcell label="@load(Product.description)"></listcell>
+					<listcell><button label="Delete" onClick="@command('deleteProduct')"></button></listcell>
+				</listitem>
+			</template>
+            
+		</listbox>
+		<window title="Images" hflex="1" closable="true">
+			<image src="@load(vm.selectedTodo.image)" width="480px" height="480px"></image>
+			<vlayout>
+				<label value="@load(vm.selectedTodo.name)"></label>
+			</vlayout>
+		</window>
+		
+	</hlayout>
+	<grid>
+			<auxhead>
+				<auxheader>Edit</auxheader>
+			</auxhead>
+			<columns>
+				<column label="ID"></column>
+				<column label="Name"></column>
+				<column label="Price"></column>
+				<column label="Description"></column>
+				<column label="Ctrl"></column>
+			</columns>
+			<rows>
+				
+				<row>
+					<textbox value="@bind(vm.selectedTodo.id)" readonly="true"></textbox>
+					<textbox value="@bind(vm.selectedTodo.name)"></textbox>
+					<textbox value="@bind(vm.selectedTodo.price)"></textbox>
+					<textbox value="@bind(vm.selectedTodo.description)"></textbox>
+					<button label="Edit" onClick="@command('saveProduct')" disabled="@load(empty vm.selectedTodo)"/>
+				</row>
+			</rows>
+		</grid>
+</window>
+</zk>

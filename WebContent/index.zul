@@ -1,0 +1,29 @@
+<?page title="Auto Generated index.zul"?>
+<window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('greenglobal.viewmodel.ProductViewModel')">
+	<listbox model="@load(vm.listModelList)"  selectedItem="@bind(vm.selectedTodo)">
+		<template name="model" var="item">
+			<listitem>
+				<listcell label="@bind(item.id)"/>
+				<listcell label="@bind(item.name)"/>
+				<listcell label="@bind(item.description)"/>
+				<listcell label="@bind(item.price)"/>
+			</listitem>
+		</template>
+	</listbox>
+	<toolbar>
+        <button label="New" onClick="@command('newProduct')" />
+        <button label="Save" onClick="@command('saveProduct')" disabled="@load(empty vm.selectedTodo)" />
+        <button label="Delete" onClick="@command('deleteProduct')" disabled="@load(empty vm.selectedTodo)" />
+    </toolbar>
+	<groupbox>	
+		<grid>
+		<rows >
+			<row>ID <label value="@bind(vm.selectedTodo.id)"></label></row>
+			<row>Name <textbox value="@bind(vm.selectedTodo.name)"></textbox></row>
+			<row>description <textbox value="@bind(vm.selectedTodo.description)"></textbox></row>
+			<row>price <textbox value="@bind(vm.selectedTodo.price)"></textbox></row>
+		</rows>
+	</grid>
+	</groupbox>
+	
+</window>
